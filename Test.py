@@ -25,13 +25,26 @@ def solve_equation():
 
     def submit_input():
         # Nhập ma trận A và vector B từ các ô nhập liệu
-        for i in range(n):
-            for j in range(m):
-                A[i][j] = float(matrix_entries[i][j].get())
+    def submit_input():
+        try:
+            # Nhập ma trận A và vector B từ các ô nhập liệu
+            for i in range(n):
+                for j in range(m):
+                    value = matrix_entries[i][j].get()
+                    if not value:
+                        print("Bạn chưa nhập dữ liệu cho ma trận A. Vui lòng nhập lại.")
+                        return
+                    A[i][j] = float(value)
 
-        for i in range(n):
-            B[i] = float(vector_entries[i].get())
-
+            for i in range(n):
+                value = vector_entries[i].get()
+                if not value:
+                    print("Bạn chưa nhập dữ liệu cho vector B. Vui lòng nhập lại.")
+                    return
+                B[i] = float(value)
+        except ValueError:
+            print("Dữ liệu nhập không hợp lệ. Vui lòng nhập số vào các ô nhập liệu.")
+            return
         # Giải hệ phương trình
         augmented_matrix = np.column_stack((A, B))
         rank_A = np.linalg.matrix_rank(A)
