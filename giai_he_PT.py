@@ -1,38 +1,77 @@
 import numpy as np
 
-def solve_linear_equations(coefficients, constants):
+def solve_linear_equations(nhapsopt, an):
     try:
-        A = np.array(coefficients)
-        B = np.array(constants)
-        A_inv = np.linalg.inv(A)
-        X = np.dot(A_inv, B)
+        A = np.array(nhapsopt)# biểu diễn các hệ số ẩn thành ma trận
+        B = np.array(an)# biểu diễn các hệ số tự do thành ma trận
+        A_inv = np.linalg.inv(A)##  tính ma trận nghịch đảo của ma trận A
+        X = np.dot(A_inv, B)#  tính tích của ma trận nghịch đảo A_inv và ma trận B
         return X
-    except np.linalg.LinAlgError:
+    except np.linalg.LinAlgError: ## nếu ma trận không thể nghịch đảo
         return None
 
 def main():
-    num_equations = int(input("Nhập số lượng phương trình: "))
-    num_unknowns = int(input("Nhập số lượng ẩn: "))
+    nhapsopt = None
+    while nhapsopt is None:
+        try:
+            nhapsopt = int(input("Nhập số lượng phương trình: "))
+            if nhapsopt <= 0:
+                print("Số lượng phương trình phải lớn hơn 0. Vui lòng nhập lại.")
+                nhapsopt = None
+        except ValueError:
+            print("Giá trị không hợp lệ. Vui lòng nhập lại.")
+    an = None
+    while an is None:
+        try:
+            an = int(input("Nhập số lượng ẩn: "))
+            if an <= 0:
+                print("Số lượng phương trình phải lớn hơn 0. Vui lòng nhập lại.")
+                an = None
+        except ValueError:
+            print("Giá trị không hợp lệ. Vui lòng nhập lại.")
 
-    coefficients = []
-    constants = []
+
+
+
+
+    hesoan_matrix = []
+    hesotudo_matrix = []
 
     print("Nhập hệ số các phương trình:")
-    for i in range(num_equations):
-        equation = []
-        for j in range(num_unknowns):
-            coefficient = float(input(f"Nhập hệ số của ẩn x{j+1} trong phương trình {i+1}: "))
-            equation.append(coefficient)
-        coefficients.append(equation)
+    for i in range(nhapsopt):
+        matrix_tam = []
+        for j in range(an):
+            hesoan = None
+            while hesoan is None:
+                try:
+                    hesoan = float(input(f"Nhập hệ số của ẩn x{j+1} trong phương trình {i+1}: "))
+                    if hesoan <= 0:
+                        print("Số lượng phương trình phải lớn hơn 0. Vui lòng nhập lại.")
+                        hesoan = None
+                except ValueError:
+                    print("Giá trị không hợp lệ. Vui lòng nhập lại.")
 
-        constant = float(input(f"Nhập hệ số tự do trong phương trình {i+1}: "))
-        constants.append(constant)
 
-    solution = solve_linear_equations(coefficients, constants)
+            matrix_tam.append(hesoan)
+        hesoan_matrix.append(matrix_tam)
+        hesotudo = None
+        while hesotudo is None:
+            try:
+                hesotudo = float(input(f"Nhập hệ số tự do trong phương trình {i + 1}: "))
+                if hesoan <= 0:
+                    print("Số lượng phương trình phải lớn hơn 0. Vui lòng nhập lại.")
+                    hesotudo = None
+            except ValueError:
+                print("Giá trị không hợp lệ. Vui lòng nhập lại.")
 
-    if solution is not None:
+
+        hesotudo_matrix.append(hesotudo)
+
+    nghiem= solve_linear_equations(hesoan_matrix, hesotudo)
+
+    if nghiem is not None:
         print("Nghiệm của hệ phương trình:")
-        for i, value in enumerate(solution):
+        for i, value in enumerate(nghiem):
             print(f"x{i+1} = {value}")
     else:
         print("Hệ phương trình vô nghiệm hoặc vô số nghiệm.")
