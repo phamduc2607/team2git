@@ -87,7 +87,7 @@ def solve_equation():
     submit_button = tk.Button(input_window, text="Xác nhận", command=submit_input)
     submit_button.grid(row=n, columnspan=m+1)
     reset_button = tk.Button(input_window, text="Reset", command=reset_input)
-    reset_button.grid(row=n+1, columnspan=m+
+    reset_button.grid(row=n+1, columnspan=m+1)
 
 # Tạo cửa sổ giao diện chính
 root = tk.Tk()
