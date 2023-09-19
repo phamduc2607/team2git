@@ -53,6 +53,19 @@ def solve_equation():
             result_label.config(text='Vô số nghiệm.')
         else:
             result_label.config(text='Vô nghiệm.')
+    def reset_input():
+        # Xóa dữ liệu nhập trong ô nhập liệu
+        for i in range(n):
+            for j in range(m):
+                matrix_entries[i][j].delete(0, tk.END)
+
+        for i in range(n):
+            vector_entries[i].delete(0, tk.END)
+
+        result_label.config(text='')
+        result_label2.config(text='')
+        num_eqn_entry.delete(0, tk.END)
+        num_vars_entry.delete(0, tk.END)
 
     # Tạo giao diện cho việc nhập ma trận A và vector B
     matrix_entries = []
@@ -73,6 +86,8 @@ def solve_equation():
 
     submit_button = tk.Button(input_window, text="Xác nhận", command=submit_input)
     submit_button.grid(row=n, columnspan=m+1)
+    reset_button = tk.Button(input_window, text="Reset", command=reset_input)
+    reset_button.grid(row=n+1, columnspan=m+
 
 # Tạo cửa sổ giao diện chính
 root = tk.Tk()
