@@ -6,12 +6,14 @@ import numpy as np
 def solve_equation():
     # Lấy giá trị n và m từ ô nhập liệu
     n_input = num_eqn_entry.get()
-    if not n_input:
-        print("Bạn chưa nhập số lượng phương trình. Vui lòng nhập lại.")
-        return
-    n = int(n_input)
-    m = int(num_vars_entry.get())
+    m_input = num_vars_entry.get()
 
+    try:
+        n = int(n_input)
+        m = int(m_input)
+    except ValueError:
+        print("Số lượng phương trình hoặc số lượng ẩn không hợp lệ. Vui lòng nhập một số nguyên.")
+        return
 
     # Kiểm tra số lượng phương trình và ẩn
     if n > m:
