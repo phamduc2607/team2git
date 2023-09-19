@@ -5,8 +5,13 @@ import numpy as np
 
 def solve_equation():
     # Lấy giá trị n và m từ ô nhập liệu
-    n= num_eqn_entry.get()
-    m = num_vars_entry.get()
+    try:
+        n = int(num_eqn_entry.get())
+        m = int(num_vars_entry.get())
+    except ValueError:
+        print("Số lượng phương trình hoặc số lượng ẩn không hợp lệ. Vui lòng nhập một số nguyên.")
+        return
+
     # Kiểm tra số lượng phương trình và ẩn
     if n > m:
         error_label.config(
