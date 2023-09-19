@@ -5,20 +5,15 @@ import numpy as np
 
 def solve_equation():
     # Lấy giá trị n và m từ ô nhập liệu
-    n_input = num_eqn_entry.get()
-    m_input = num_vars_entry.get()
-
-    try:
-        n = int(n_input)
-        m = int(m_input)
-    except ValueError:
-        print("Số lượng phương trình hoặc số lượng ẩn không hợp lệ. Vui lòng nhập một số nguyên.")
-        return
-
+    n= num_eqn_entry.get()
+    m = num_vars_entry.get()
     # Kiểm tra số lượng phương trình và ẩn
     if n > m:
-        print("Hệ phương trình không hợp lệ. Số lượng phương trình phải ít hơn hoặc bằng số lượng ẩn.")
-    exit()
+        error_label.config(
+            text='Hệ phương trình không hợp lệ. Số lượng phương trình phải ít hơn hoặc bằng số lượng ẩn.')
+        return
+    else:
+        error_label.config(text='')  # Xóa thông báo lỗi nếu đã nhập giá trị hợp lệ
 
     # Tạo cửa sổ giao diện cho việc nhập ma trận A và vector B
     input_window = tk.Toplevel(root)
@@ -112,5 +107,7 @@ result_label = tk.Label(root, text="")
 result_label.pack()
 result_label2 = tk.Label(root, text="")
 result_label2.pack()
+error_label = tk.Label(root, text="")
+error_label.pack()
 
 root.mainloop()
