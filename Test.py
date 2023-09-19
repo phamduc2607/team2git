@@ -5,11 +5,17 @@ import numpy as np
 
 def solve_equation():
     # Lấy giá trị n và m từ ô nhập liệu
-    n = int(num_eqn_entry.get())
+    n_input = num_eqn_entry.get()
+    if not n_input:
+        print("Bạn chưa nhập số lượng phương trình. Vui lòng nhập lại.")
+        return
+    n = int(n_input)
     m = int(num_vars_entry.get())
+
+
     # Kiểm tra số lượng phương trình và ẩn
     if n > m:
-    print("Hệ phương trình không hợp lệ. Số lượng phương trình phải ít hơn hoặc bằng số lượng ẩn.")
+        print("Hệ phương trình không hợp lệ. Số lượng phương trình phải ít hơn hoặc bằng số lượng ẩn.")
     exit()
 
     # Tạo cửa sổ giao diện cho việc nhập ma trận A và vector B
