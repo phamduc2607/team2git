@@ -24,8 +24,6 @@ def solve_equation():
     B = np.zeros(n)
 
     def submit_input():
-        # Nhập ma trận A và vector B từ các ô nhập liệu
-    def submit_input():
         try:
             # Nhập ma trận A và vector B từ các ô nhập liệu
             for i in range(n):
