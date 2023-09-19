@@ -7,6 +7,10 @@ def solve_equation():
     # Lấy giá trị n và m từ ô nhập liệu
     n = int(num_eqn_entry.get())
     m = int(num_vars_entry.get())
+    # Kiểm tra số lượng phương trình và ẩn
+    if n > m:
+    print("Hệ phương trình không hợp lệ. Số lượng phương trình phải ít hơn hoặc bằng số lượng ẩn.")
+    exit()
 
     # Tạo cửa sổ giao diện cho việc nhập ma trận A và vector B
     input_window = tk.Toplevel(root)
