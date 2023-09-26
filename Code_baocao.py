@@ -32,7 +32,6 @@ def sosinhvientruot():
     plt.legend(loc='upper right')
     plt.show()
 
-# Hàm tìm giá trị nhỏ nhất và lớn nhất trong ma trận ngẫu nhiên
 def sosinhviendat():
     sv = in_data[:, 1]
     tongsv = np.sum(sv)
@@ -52,7 +51,22 @@ def sosinhviendat():
     plt.legend(loc='upper right')
     plt.show()
 
-# Hàm tính tích vô hướng của hai mảng
+def sinhvienA():
+    diemA = in_data[:, 3]
+    maxa = diemA.max()
+    i, = np.where(diemA == maxa)
+    result_text.insert(END, 'Lớp có nhiều sinh viên điểm A là {0} có {1} sinh viên đạt điểm A \n'
+                       .format(in_data[i, 0], maxa))
+    categories1 = ['Lớp 1', 'Lớp 2', 'Lớp 3', 'Lớp 4', 'Lớp 5', 'Lớp 6', 'Lớp 7', 'Lớp 8', 'Lớp 9']
+    values1 = [in_data[0, 3],in_data[1, 3],in_data[2, 3],in_data[3, 3],
+              in_data[4, 3],in_data[5, 3],in_data[6, 3],in_data[7, 3],in_data[8, 3]]
+    plt.figure(3)
+    plt.bar(categories1, values1,label="Sinh viên đạt điểm A")
+    plt.title('Biểu đồ số sinh viên đat điểm A của các lớp')
+    plt.ylabel('Số sinh viên')
+    plt.legend(loc='upper right')
+    plt.show()
+    
 def phodiem():
     diemA = in_data[:, 3]
     diemBc = in_data[:, 4]
@@ -80,13 +94,14 @@ def reset_result():
 
 # Tạo cửa sổ giao diện
 window = tk.Tk()
-window.title("Ứng dụng NumPy")
+window.title("Ứng dụng báo cáo")
 
 # Tạo các nút chức năng
 htdanhsach_button = tk.Button(window, text="Hiển thị danh sách", command=hienthidanhsach)
 tongsinhvien_button = tk.Button(window, text="Tổng sinh viên đi thi", command=tongsinhvien)
 sinhvientruot_button = tk.Button(window, text="Số sinh viên trượt", command=sosinhvientruot)
 sinhviendat_button = tk.Button(window, text="Số sinh viên đạt", command=sosinhviendat)
+sinhvienA_button = tk.Button(window, text="Sinh viên đạt điểm A", command=sinhvienA)
 phodiem_button = tk.Button(window, text="Phổ điểm", command=phodiem)
 reset_button = tk.Button(window, text="Reset", command=reset_result)
 
@@ -100,6 +115,7 @@ htdanhsach_button.pack()
 tongsinhvien_button.pack()
 sinhviendat_button.pack()
 sinhvientruot_button.pack()
+sinhvienA_button.pack()
 phodiem_button.pack()
 reset_button.pack()
 result_text.pack()
