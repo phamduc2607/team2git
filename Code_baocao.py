@@ -17,56 +17,60 @@ def tongsinhvien():
     result_text.insert(END, "Tổng số sinh viên đi thi:\n")
     result_text.insert(END, str(tongsv) + "\n\n")
 
+
 def sosinhvientruot():
     svtruot = in_data[:, 10]
-    tongsvtruot=np.sum(svtruot)
+    tongsvtruot = np.sum(svtruot)
     result_text.insert(END, "Tổng số sinh viên trượt môn:")
     result_text.insert(END, str(tongsvtruot) + "\n\n")
+
     categories1 = ['Lớp 1', 'Lớp 2', 'Lớp 3', 'Lớp 4', 'Lớp 5', 'Lớp 6', 'Lớp 7', 'Lớp 8', 'Lớp 9']
-    values1 = [in_data[0, 10],in_data[1, 10],in_data[2, 10],in_data[3, 10],
-              in_data[4, 10],in_data[5, 10],in_data[6, 10],in_data[7, 10],in_data[8, 10]]
+    values1 = in_data[:, 10]
+
     plt.figure(1)
-    plt.bar(categories1, values1,color='red',label="Sinh viên trượt")
+    plt.bar(categories1, values1, color='red', label="Sinh viên trượt")
     plt.title('Biểu đồ số sinh viên trượt của các lớp')
     plt.ylabel('Số sinh viên')
     plt.legend(loc='upper right')
     plt.show()
+
 
 def sosinhviendat():
     sv = in_data[:, 1]
     tongsv = np.sum(sv)
     svtruot = in_data[:, 10]
     tongsvtruot = np.sum(svtruot)
-    tongsvdat=tongsv-tongsvtruot
+    tongsvdat = tongsv - tongsvtruot
     result_text.insert(END, "Tổng số sinh viên qua môn:")
     result_text.insert(END, str(tongsvdat) + "\n\n")
+
     categories2 = ['Lớp 1', 'Lớp 2', 'Lớp 3', 'Lớp 4', 'Lớp 5', 'Lớp 6', 'Lớp 7', 'Lớp 8', 'Lớp 9']
-    values2 = [np.sum(in_data[0,2:10]),np.sum(in_data[1,2:10]),np.sum(in_data[2,2:10]),np.sum(in_data[3,2:10]),
-              np.sum(in_data[4, 2:10]),np.sum(in_data[5,2:10]),np.sum(in_data[6,2:10]),
-              np.sum(in_data[7,2:10]),np.sum(in_data[8,2:10])]
+    values2 = np.sum(in_data[0:9, 2:10], axis=1).flatten()
+
     plt.figure(1)
-    plt.bar(categories2, values2,color='green',label="Sinh viên đạt")
+    plt.bar(categories2, values2, color='green', label="Sinh viên đạt")
     plt.title('Biểu đồ số sinh viên đạt của các lớp')
     plt.ylabel('Số sinh viên')
     plt.legend(loc='upper right')
     plt.show()
 
+
 def sinhvienA():
     diemA = in_data[:, 3]
     maxa = diemA.max()
-    i, = np.where(diemA == maxa)
+    i = np.argmax(diemA)
     result_text.insert(END, 'Lớp có nhiều sinh viên điểm A là {0} có {1} sinh viên đạt điểm A \n'
                        .format(in_data[i, 0], maxa))
+
     categories1 = ['Lớp 1', 'Lớp 2', 'Lớp 3', 'Lớp 4', 'Lớp 5', 'Lớp 6', 'Lớp 7', 'Lớp 8', 'Lớp 9']
-    values1 = [in_data[0, 3],in_data[1, 3],in_data[2, 3],in_data[3, 3],
-              in_data[4, 3],in_data[5, 3],in_data[6, 3],in_data[7, 3],in_data[8, 3]]
+    values1 = in_data[:, 3]
+
     plt.figure(3)
-    plt.bar(categories1, values1,label="Sinh viên đạt điểm A")
-    plt.title('Biểu đồ số sinh viên đat điểm A của các lớp')
+    plt.bar(categories1, values1, label="Sinh viên đạt điểm A")
+    plt.title('Biểu đồ số sinh viên đạt điểm A của các lớp')
     plt.ylabel('Số sinh viên')
     plt.legend(loc='upper right')
     plt.show()
-    
 def phodiem():
     diemA = in_data[:, 3]
     diemBc = in_data[:, 4]
