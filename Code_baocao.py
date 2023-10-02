@@ -177,6 +177,18 @@ def reset_result():
     result_text.delete(1.0, END)
     plt.close('all')
 
+def display_grade_table():
+    labels = ["A", "B+", "B", "C+", "C", "D+", "D", "F"]
+    grade_counts = diems.sum(axis=0)
+    result_text.insert(END, "Số lượng sinh viên theo điểm:\n")
+    result_text.insert(END, "--------------------------------\n")
+    result_text.insert(END, "Điểm\tSố lượng sinh viên\n")
+    result_text.insert(END, "--------------------------------\n")
+    for label, count in zip(labels, grade_counts):
+        result_text.insert(END, f"{label}\t{count}\n")
+        result_text.insert(END, "--------------------------------\n")
+
+
 # Tạo cửa sổ giao diện
 window = tk.Tk()
 window.title("Ứng dụng báo cáo")
@@ -207,6 +219,7 @@ result_text.grid(row=0, column=1, rowspan=7, padx=10, pady=10, sticky="nsew")
 result_text_scrollbar.grid(row=0, column=2, rowspan=7, sticky="ns")
 xuat_word_button.grid(row=7, column=0, padx=10, pady=10, sticky="ew")
 
-
+display_grade_table_button = tk.Button(window, text="Hiển thị bảng điểm", command=display_grade_table)
+display_grade_table_button.grid(row=8, column=0, padx=10, pady=10, sticky="ew")
 # Chạy ứng dụng
 window.mainloop()
