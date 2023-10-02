@@ -57,20 +57,21 @@ def tongsinhvien():
     percent_truot = (tongsvtruot / tongsv) * 100
 
     result_text.insert(END, "Tổng số sinh viên qua môn: " + str(tongsvdat) + " sinh viên (" + str(percent_dat) + "%)\n")
-    result_text.insert(END, "Tổng số sinh viên trượt môn: " + str(tongsvtruot) + " sinh viên (" + str(percent_truot) + "%)\n\n")
+    result_text.insert(END, "Tổng số sinh viên trượt môn: " + str(tongsvtruot) + " sinh viên (" + str(
+        percent_truot) + "%)\n\n")
     categories = ['Lớp 1', 'Lớp 2', 'Lớp 3', 'Lớp 4', 'Lớp 5', 'Lớp 6', 'Lớp 7', 'Lớp 8', 'Lớp 9']
     values1 = np.sum(in_data[0:9, 2:10], axis=1).flatten()
     values2 = in_data[:, 10]
     total_values = values1 + values2
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 18))
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 6))
 
     ax1.bar(categories, values1, color='green', label="Sinh viên đạt")
     ax1.bar(categories, values2, bottom=values1, color='red', label="Sinh viên trượt")
 
     for i, (v1, v2, tv) in enumerate(zip(values1, values2, total_values)):
-        ax1.text(i, v1/2, str(v1), ha='center', va='bottom', color='white', fontweight='bold')
-        ax1.text(i, v1 + v2/2, str(v2), ha='center', va='bottom', color='white', fontweight='bold')
+        ax1.text(i, v1 / 2, str(v1), ha='center', va='bottom', color='white', fontweight='bold')
+        ax1.text(i, v1 + v2 / 2, str(v2), ha='center', va='bottom', color='white', fontweight='bold')
         ax1.text(i, v1 + v2, str(tv), ha='center', va='bottom', color='black', fontweight='bold')
 
     ax1.set_title('Biểu đồ số sinh viên trong các lớp')
@@ -79,9 +80,13 @@ def tongsinhvien():
 
     ax2.pie(total_values, labels=categories, autopct='%1.1f%%')
     ax2.set_title('Biểu đồ tỷ lệ sinh viên theo lớp')
+
+    ax3.pie([percent_dat, percent_truot], labels=["Sinh viên đạt", "Sinh viên trượt"], autopct='%1.1f%%')
+    ax3.set_title('Biểu đồ tỷ lệ sinh viên đạt và trượt')
+
     # Lưu hình ảnh
     plt.savefig('chart.png')
-    plt.subplots_adjust(hspace=0.5)
+    plt.subplots_adjust(wspace=0.5)
     plt.show()
 
 def sosinhvientruot():
