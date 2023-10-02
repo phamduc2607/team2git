@@ -4,7 +4,40 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from numpy import array
 import numpy as np
+import os
+from docx import Document
 
+def export_text_to_word(text_widget, file_path):
+    # Lấy nội dung từ ô văn bản
+    content = text_widget.get("1.0", "end-1c")
+
+    # Tạo một tài liệu Word mới
+    doc = Document()
+
+    # Thêm nội dung vào tài liệu
+    doc.add_paragraph(content)
+
+    charts = ['chart1.png','chart.png','chart2.png']
+
+    for chart in charts:
+        if os.path.exists(chart):
+            doc.add_picture(chart)
+    # Lưu tài liệu vào file Word
+    doc.save(file_path)
+def draw_chart():
+
+  # code vẽ biểu đồ
+
+  plt.savefig('chart.png')
+  plt.savefig('chart2.png')
+  plt.savefig('chart1.png')
+def xuat_word():
+
+  file_path = "output.docx"
+
+  export_text_to_word(result_text, file_path)
+
+  messagebox.showinfo("Thông báo", "Xuất file thành công")
 df = pd.read_csv('diemPython.csv', index_col=0, header=0)
 in_data = array(df.iloc[:, :])
 def hienthidanhsach():
@@ -46,7 +79,8 @@ def tongsinhvien():
 
     ax2.pie(total_values, labels=categories, autopct='%1.1f%%')
     ax2.set_title('Biểu đồ tỷ lệ sinh viên theo lớp')
-
+    # Lưu hình ảnh
+    plt.savefig('chart.png')
     plt.subplots_adjust(hspace=0.5)
     plt.show()
 
@@ -130,7 +164,8 @@ def phodiem():
     ax2.pie(grade_counts, labels=labels, colors=colors, autopct='%1.1f%%')
     ax2.axis('equal')
     ax2.set_title('Phổ điểm')
-
+    # Lưu hình ảnh
+    plt.savefig('chart1.png')
     plt.tight_layout()
     plt.show()
 def reset_result():
@@ -149,7 +184,7 @@ sinhviendat_button = tk.Button(window, text="Số sinh viên đạt", command=so
 sinhvienA_button = tk.Button(window, text="Sinh viên đạt điểm A", command=sinhvienA)
 phodiem_button = tk.Button(window, text="Phổ điểm", command=phodiem)
 reset_button = tk.Button(window, text="Reset", command=reset_result)
-
+xuat_word_button = tk.Button(window, text="Xuất file word", command=xuat_word)
 # Tạo ô văn bản để hiển thị kết quả
 result_text = Text(window, wrap="word", height=20, width=200)
 result_text_scrollbar = Scrollbar(window, command=result_text.yview)
@@ -165,6 +200,7 @@ phodiem_button.grid(row=5, column=0, padx=10, pady=10, sticky="ew")
 reset_button.grid(row=6, column=0, padx=10, pady=10, sticky="ew")
 result_text.grid(row=0, column=1, rowspan=7, padx=10, pady=10, sticky="nsew")
 result_text_scrollbar.grid(row=0, column=2, rowspan=7, sticky="ns")
+xuat_word_button.grid(row=7, column=0, padx=10, pady=10, sticky="ew")
 
 
 # Chạy ứng dụng
