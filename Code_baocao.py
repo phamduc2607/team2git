@@ -59,7 +59,7 @@ def tongsinhvien():
     result_text.insert(END, "Tổng số sinh viên qua môn: " + str(tongsvdat) + " sinh viên (" + str(percent_dat) + "%)\n")
     result_text.insert(END, "Tổng số sinh viên trượt môn: " + str(tongsvtruot) + " sinh viên (" + str(
         percent_truot) + "%)\n\n")
-    categories = ['Lớp 1', 'Lớp 2', 'Lớp 3', 'Lớp 4', 'Lớp 5', 'Lớp 6', 'Lớp 7', 'Lớp 8', 'Lớp 9']
+    categories = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
     values1 = np.sum(in_data[0:9, 2:10], axis=1).flatten()
     values2 = in_data[:, 10]
     total_values = values1 + values2
@@ -76,6 +76,7 @@ def tongsinhvien():
 
     ax1.set_title('Biểu đồ số sinh viên trong các lớp')
     ax1.set_ylabel('Số sinh viên')
+    ax1.set_xlabel('Lớp')
     ax1.legend(loc='upper right')
 
     ax2.pie(total_values, labels=categories, autopct='%1.1f%%')
